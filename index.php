@@ -9,16 +9,11 @@
     <title>The ArtBox</title>
 </head>
 <body>
-    <header>
-        <a href="index.html"><img src="img/logo.png" alt="Logo Artbox" id="logo"></a>
-        <nav>
-            <ul>
-                <li><a href="index.html">Accueil</a></li>
-            </ul>
-        </nav>
-    </header>
+    <?php include('header.php'); ?>
     <main>
+        <?php include('oeuvres.php'); ?>
         <div id="liste-oeuvres">
+            <!--
             <article class="oeuvre">
                 <a href="oeuvre-1.html">
                     <img src="img/clark-van-der-beken.png" alt="Dodomu">
@@ -124,12 +119,23 @@
                     <p class="description">Adelheid Von Schreiber</p>
                 </a>
             </article>
+            -->
+            <?php foreach ($artArray as $art) : ?> 
+                <article class="oeuvre">
+                    <a href="oeuvre.php?id=<?php echo $art["id"]; ?>">
+                        <img src="<?php echo $art['img']; ?>" alt="<?php echo $art['title']; ?>">
+                        <h2>
+                            <?php echo $art['title']; ?>
+                        </h2>
+                        <p class="description">
+                            <?php echo $art['creator']; ?>
+                        </p>
+                    </a>
+                 </article>
+            <?php endforeach ?>    
+            
         </div>
     </main>
-    <footer>
-        <p>
-            <strong>© THE ARTBOX</strong> - <em>Tous droits réservés</em>
-        </p>
-    </footer>
+    <?php include('footer.php'); ?>
 </body>
 </html>
