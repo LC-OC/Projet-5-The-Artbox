@@ -11,12 +11,21 @@
 <body>
     <?php include('header.php'); ?>
     <main>
-        <?php include('oeuvres.php');
-        $id = $_GET['id'];
-         ?>
+        <?php 
+            include('oeuvres.php');
+            $id = $_GET['id'];
+
+            // Renvoyer vers la paoge d'accueil si l'id saisi dans l'url n'existe pas
+            if (!in_array($id, array_column($artArray, "id"))) {
+                header("Location: index.php");
+            }  
+        ?>
+
+         <!-- Afficher les oeuvres-->
+
         <article id="detail-oeuvre">
-            <?php foreach($artArray as $art) : ?>
-                <?php if(in_array($id, $art)) : ?>
+            <?php foreach($artArray as $art) : 
+                 if(in_array($id, $art)) : ?>
                     <div id="img-oeuvre">
                         <img src="<?php echo $art['img']; ?>" alt="<?php echo $art['title']; ?>">
                      </div>
@@ -29,8 +38,8 @@
                             <?php echo $art['description']; ?>
                         </p>
                      </div>
-                <?php endif; ?>
-            <?php endforeach; ?>
+                <?php endif;
+               endforeach; ?>
         </article>
     </main>
     <?php include('footer.php'); ?>
